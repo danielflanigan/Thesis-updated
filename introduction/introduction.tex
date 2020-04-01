@@ -1,0 +1,328 @@
+\chapter{Introduction and notation}
+\label{chp:introduction}
+
+This thesis deals with the physics and design of sensitive superconducting detectors called kinetic inductance detectors (KIDs).
+The detectors discussed here are designed to be used in future experiments to measure the polarization of the cosmic microwave background (CMB).
+In Chapter~\ref{chp:cmb}, I give a brief introduction to cosmology, focusing on the the properties of the CMB and on the experiments that measure it.
+This chapter is intended to motivate the detector research described in later chapters, and it contains no new results.
+In Chapter~\ref{chp:theory}, I introduce kinetic inductance detectors and discuss the basic theory needed to understand their response to light, focusing on the dynamics of the quasiparticle system.
+I derive an equation that describes the dynamics of the quasiparticle number, solve it in a simplified form not previously published, and show that it can describe the dynamic response of a detector. 
+Chapter~\ref{chp:loss} deals with non-ideal sources of dissipation that can occur in superconducting resonators, degrading their performance as detectors.
+I show that magnetic flux vortices in a superconducting thin film can be a significant source of dissipation, and demonstrate some techniques to prevent their formation.
+This chapter includes published work (\textcite{Flanigan2016bAPL}) in which we measured the relationship between magnetic field and dissipation due to vortices in a KID.
+Chapter~\ref{chp:sensitivity} is concerned with noise sources and KID sensitivity.
+Based on the theory presented in Chapter~\ref{chp:theory}, I derive a corrected version of a widely-used equation for the quasiparticle recombination noise in a KID.
+I show that a KID consisting of a lumped-element resonator can be sensitive enough to be limited by photon noise, which is the fundamental limit for photometry, at a level of optical loading below levels in ground-based CMB experiments.
+This chapter includes published work (\textcite{Flanigan2016aAPL}) in which we measured photon noise using a KID.
+Chapter~\ref{chp:multichroic} describes an ongoing project to develop multichroic KID pixels that are each sensitive to two linear polarization states in two spectral bands, intended for the next generation of CMB experiments.
+I show that a prototype 23-pixel array can detect millimeter-wave light, and present characterization measurements of the detectors.
+This chapter includes material from two papers (\textcite{Johnson2016SPIE, Johnson2017arXiv}) that discuss the results of the project.
+In the Appendices, I discuss connections to earlier work, derive some of the equations presented in the main text, and present more information about the hardware used in the experiments.
+
+% Math
+\newcommand{\I}{\mathrm{i}}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\stepfunction}{\mathrm{H}}
+
+% Subscripts
+\newcommand{\quasiparticle}{\mathrm{qp}}
+\newcommand{\normal}{\mathrm{n}}
+\newcommand{\superconducting}{\mathrm{s}}
+\newcommand{\absorbed}{\mathrm{A}}
+\newcommand{\incident}{\mathrm{I}}
+\newcommand{\source}{\mathrm{S}}
+\newcommand{\critical}{\mathrm{c}}
+\newcommand{\generation}{\mathrm{G}}
+\newcommand{\recombination}{\mathrm{R}}
+\newcommand{\thermal}{\mathrm{t}}
+\newcommand{\background}{\mathrm{B}}
+\newcommand{\resonator}{\mathrm{r}}
+\newcommand{\internal}{\mathrm{i}}
+\newcommand{\coupling}{\mathrm{c}}
+\newcommand{\bath}{\mathrm{b}}
+\newcommand{\photon}{\gamma}
+\newcommand{\optical}{\mathrm{o}}
+\newcommand{\constant}{0}
+\newcommand{\tls}{\mathrm{TLS}}
+\newcommand{\readout}{\varrho}
+\newcommand{\continuouswave}{\mathrm{cw}}
+\newcommand{\broadband}{\mathrm{bb}}
+\newcommand{\dark}{\mathrm{dark}}
+\newcommand{\maximum}{\mathrm{max}}
+\newcommand{\knee}{\mathrm{k}}
+\newcommand{\cutoff}{\mathrm{c}}
+\newcommand{\threshold}{\mathrm{th}}
+\newcommand{\ambient}{\mathrm{a}}
+\newcommand{\adr}{\mathrm{ADR}}
+\newcommand{\magnetarray}{\mathrm{m}}
+\newcommand{\fermi}{\mathrm{F}}
+\newcommand{\debye}{\mathrm{D}}
+\newcommand{\zerotemp}{0}
+\newcommand{\surface}{s}
+\newcommand{\vacuum}{0}
+\newcommand{\multichroic}{\mathrm{mc}}
+\newcommand{\singlepol}{\mathrm{1p}}
+\newcommand{\dualpol}{\mathrm{2p}}
+\newcommand{\kinetic}{\mathrm{k}}
+\newcommand{\geometric}{\mathrm{g}}
+\newcommand{\vortex}{\mathrm{v}}
+\newcommand{\radiation}{\mathrm{rad}}
+\newcommand{\substrate}{\mathrm{sub}}
+\newcommand{\group}{\mathrm{g}}
+
+% General symbols
+\renewcommand{\time}{t}  % L3 Module: l3sys 2015/09/25 v6087 L3 Experimental system/runtime functions
+\newcommand{\mass}{m}
+\newcommand{\velocity}{v}
+\newcommand{\lightspeed}{c}
+\newcommand{\soundspeed}{s}
+\newcommand{\momentum}{p}
+\newcommand{\spectraldensity}{S}
+\newcommand{\Rate}{\Gamma}
+\newcommand{\rate}{\gamma}
+\newcommand{\ssRate}{\overline{\Rate}}
+\newcommand{\ssrate}{\overline{\rate}}
+\newcommand{\eventrate}{\kappa}
+\newcommand{\energy}{E}
+\newcommand{\power}{P}
+\newcommand{\temperature}{T}
+\newcommand{\wvec}{k}
+\newcommand{\vwvec}{\vb{\wvec}}
+\newcommand{\foptical}{\nu}
+\newcommand{\freadout}{f}
+\newcommand{\faudio}{\varphi}
+\newcommand{\efficiency}{\eta}
+\newcommand{\volume}{\mathcal{V}}
+\newcommand{\nep}{\mathrm{NEP}}
+\newcommand{\spectralindex}{\alpha}
+\newcommand{\opticalbandwidth}{B}
+\newcommand{\impedance}{Z}
+\newcommand{\resistance}{R}
+\newcommand{\reactance}{X}
+\newcommand{\inductance}{L}
+\newcommand{\capacitance}{C}
+\newcommand{\efield}{E}
+\newcommand{\bfield}{B}
+\newcommand{\dfield}{D}
+\newcommand{\hfield}{H}
+\newcommand{\vefield}{\vb{E}}
+\newcommand{\vbfield}{\vb{B}}
+\newcommand{\vdfield}{\vb{D}}
+\newcommand{\vhfield}{\vb{H}}
+\newcommand{\voltage}{V}
+\newcommand{\currentdensity}{J}
+\newcommand{\current}{I}
+\newcommand{\quantum}{k}
+\newcommand{\resistivity}{\rho}
+\newcommand{\conductivity}{\sigma}
+\newcommand{\diffusion}{D}
+
+% Physical constants
+\newcommand{\lsvac}{\lightspeed_\vacuum}
+\newcommand{\impvac}{\impedance_\vacuum}
+\newcommand{\planck}{h}
+\newcommand{\kb}{k_\mathrm{B}}
+\newcommand{\unitcharge}{e}
+\newcommand{\fluxquantum}{\Phi_0}
+
+\begin{table}[tb]
+\centering
+\caption
+{Physical constants.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c l}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\lsvac$ & The speed of light in vacuum \\ 
+$\impvac$ & The impedance of vacuum \\
+$\planck$ & The Planck constant \\
+$\hbar$ & The reduced Planck constant, $\planck / 2 \pi$ \\
+$\kb$ & The Boltzmann constant \\
+$\unitcharge$ & The elementary charge (positive) \\
+$\fluxquantum$ & The superconducting flux quantum \\
+\bottomrule
+\end{tabular}
+\label{tab:notation.physical_constants}
+\end{table}
+
+% Cosmology and astrophysics
+\newcommand{\scalefactor}{a}
+\newcommand{\redshift}{z}
+\newcommand{\wavelength}{\lambda}
+
+% Miscellaneous symbols
+\newcommand{\photonoccupancy}{n}
+\newcommand{\detectiontime}{\tau}
+\newcommand{\tracewidth}{w}
+\newcommand{\tracelength}{\ell}
+\newcommand{\thickness}{d}
+\newcommand{\distance}{d}
+\newcommand{\vortexnumber}{N}
+\newcommand{\forwardscattering}{S_{21}}
+\newcommand{\amplifierwhite}{A}
+\newcommand{\detectorwhite}{W}
+\newcommand{\detectorred}{R}
+\newcommand{\responseqpoccupancy}{K}
+\newcommand{\normresponse}{\Upsilon}
+\newcommand{\ssnormresponse}{\overline{\normresponse}}
+\newcommand{\jonasbeta}{\beta}
+
+\begin{table}[tb]
+\centering
+\caption
+{General symbols.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c l}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\Rate$ & A macroscopic (extensive) rate of some process in a given volume \\
+$\rate$ & A microscopic (intensive) rate per unit volume \\
+$\foptical$ & An ``optical'' frequency, used for millimeter-wave light around \SI{100}{GHz} \\
+$\freadout$ & A microwave frequency, used for readout tones around \SI{1}{GHz} \\
+$\faudio$ & An ``audio'' frequency, used for detector time-ordered data around \SI{1}{kHz} \\
+\bottomrule
+\end{tabular}
+\label{tab:notation.general}
+\end{table}
+
+% Condensed matter: solids, phonons, and superconductivity
+\newcommand{\gap}{\Delta}
+\newcommand{\tc}{\temperature_\critical}
+\newcommand{\coherencelength}{\xi_0}
+\newcommand{\penetrationdepth}{\lambda}
+\newcommand{\qpnumber}{N_\quasiparticle}
+\newcommand{\ssqpnumber}{\overline{N}_\quasiparticle}
+\newcommand{\qpdensity}{n_\quasiparticle}
+\newcommand{\ssqpdensity}{\overline{n}_\quasiparticle}
+\newcommand{\phononenergy}{\Omega}
+\newcommand{\blochenergy}{\varepsilon}
+\newcommand{\blochenergyf}{\xi}
+\newcommand{\qprdos}{\rho}
+\newcommand{\ssdos}{N_0}
+\newcommand{\supssdos}{N_\mathrm{s}}
+\newcommand{\bcspotential}{V_\mathrm{BCS}}
+\newcommand{\qprecombination}{R}
+\newcommand{\qprecombinationeff}{\mathcal{R}}
+\newcommand{\qpsingledecay}{\mathcal{S}}
+\newcommand{\qprecombinationtime}{\tau_\mathrm{R}}
+\newcommand{\qprelaxationtime}{\tau_\quasiparticle}
+\newcommand{\qpphononscatteringtime}{\tau_\mathrm{s}}
+\newcommand{\electronphonontime}{\tau_0}
+\newcommand{\phononpairbreakingtime}{\tau_\mathrm{br}}
+\newcommand{\phononescapetime}{\tau_\mathrm{es}}
+\newcommand{\phonontrapping}{F}
+\newcommand{\meanfreepath}{\ell}
+\newcommand{\qpoccupancy}{\mathcal{F}}
+\newcommand{\ssqpoccupancy}{\overline{\qpoccupancy}}
+\newcommand{\reconductivity}{\conductivity_1}
+\newcommand{\imconductivity}{\conductivity_2}
+\newcommand{\ssreconductivity}{\overline{\conductivity}_1}
+\newcommand{\ssimconductivity}{\overline{\conductivity}_2}
+\newcommand{\normalconductivity}{\conductivity_\normal}
+\newcommand{\dynes}{\Gamma}
+\newcommand{\mitrovic}{\Delta_2}
+\newcommand{\ucvolume}{\volume_\mathrm{uc}}
+\newcommand{\qpdiffusion}{\diffusion_\quasiparticle}
+\newcommand{\normaldiffusion}{\diffusion_\normal}
+
+\begin{table}[tb]
+\centering
+\caption
+{Symbols related to condensed matter: solids, superconductivity, and phonons.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c l}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\gap \; (\gap_\zerotemp)$ & The superconductor gap energy (at zero temperature) \\
+$\tc$ & The critical temperature of a superconductor \\
+$\coherencelength$ & The superconducting coherence length \\
+$\penetrationdepth$ & The superconducting penetration depth \\
+$\qpnumber$ & The number of quasiparticles in a given region  \\
+$\qpdensity$ & The number of quasiparticles per unit volume \\
+$\phononenergy$ & The energy of a phonon \\
+$\blochenergy$ & The energy of a Bloch state \\
+$\blochenergy_\fermi$ & The Fermi energy \\
+$\blochenergyf$ & The energy of a Bloch state, measured from the Fermi energy \\
+$\velocity_\fermi$ & The Fermi velocity \\
+$\qprdos$ & The reduced quasiparticle density of states \\
+$\ssdos$ & The single-spin density of electron states at the Fermi energy \\
+$\supssdos$ & The single-spin density of quasiparticle states \\
+$\bcspotential$ & The BCS potential energy \\
+$\qprecombination$ & The intrinsic quasiparticle recombination constant \\
+$\qprecombinationeff$ & The effective quasiparticle recombination constant, including phonon trapping \\
+$\qpsingledecay$ & The single-quasiparticle decay constant \\
+$\qprecombinationtime$ & The average recombination lifetime of a single quasiparticle \\
+$\qprelaxationtime$ & The relaxation time of a small perturbation to the quasiparticle density \\
+$\electronphonontime$ & The characteristic electron-phonon interaction time \\
+$\qpphononscatteringtime$ & The quasiparticle-phonon scattering time \\
+$\phononpairbreakingtime$ & The phonon pair-breaking time \\
+$\phononescapetime$ & The phonon escape time from a film \\
+$\phonontrapping$ & The phonon trapping factor \\
+$\meanfreepath$ & The electron mean-free path \\
+$\qpoccupancy$ & The quasiparticle occupancy (``distribution function'') \\
+$\normalconductivity$ & The conductivity in the normal state just above $\tc$ \\
+$\reconductivity$ & The real part of the complex conductivity \\
+$\imconductivity$ & The imaginary part of the complex conductivity \\
+$\dynes$ & The imaginary part of the quasiparticle energy \\
+$\mitrovic$ & The imaginary part of the gap energy \\
+$\ucvolume$ & The volume of a unit cell in a crystal \\
+\bottomrule
+\end{tabular}
+\label{tab:notation.condensed_matter}
+\end{table}
+
+% Resonator symbols
+\newcommand{\shift}{s}
+\newcommand{\ssshift}{\overline{\shift}}
+\newcommand{\detuning}{x}
+\newcommand{\ssdetuning}{\overline{\detuning}}
+\newcommand{\loss}{\Lambda}
+\newcommand{\ssloss}{\overline{\loss}}
+\newcommand{\qf}{Q}
+\newcommand{\asymmetry}{A}
+\newcommand{\surfimpexp}{\zeta}
+\newcommand{\kifraction}{\alpha}
+\newcommand{\qpfraction}{\chi_\quasiparticle}
+\newcommand{\restransfer}{\xi_\resonator}
+\newcommand{\pbefficiency}{\efficiency_\mathrm{pb}}
+\newcommand{\qpperphoton}{q}
+\newcommand{\adiabatici}{\Sigma_{\loss_\internal}}
+\newcommand{\adiabaticx}{\Sigma_\detuning}
+
+\begin{table}[tb]
+\centering
+\caption
+{Symbols related to resonators and kinetic inductance detectors.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c l}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\freadout_\resonator$ & The resonance frequency \\
+$\freadout_\readout$ & The readout tone frequency \\
+$\shift$ & The fractional resonance frequency shift from the fiducial, or zero temperature, case \\
+$\detuning$ & The fractional detuning of the resonance frequency from the readout frequency \\
+$\qf$ & A resonator quality factor: $\qf_\alpha \equiv \loss_\alpha^{-1}$ for all subscripts $\alpha$ \\
+$\loss$ & A resonator inverse quality factor, or loss: $\loss_\alpha \equiv \qf_\alpha^{-1}$ for all subscripts $\alpha$ \\
+$\asymmetry$ & A parameter that quantifies the asymmetry of a resonance \\
+$\surfimpexp$ & The exponent in the dependence of the surface impedance on film thickness \\
+$\kifraction$ & The effective kinetic inductance fraction \\
+$\qpfraction$ & The ratio of the quasiparticle loss to the total loss \\
+$\restransfer$ & The frequency-dependent resonator transfer function \\
+$\pbefficiency$ & The photon pair-breaking efficiency \\
+$\qpperphoton$ & The average number of quasiparticles excited per absorbed photon \\
+\bottomrule
+\end{tabular}
+\label{tab:notation.resonator}
+\end{table}
+
+Tables~\ref{tab:notation.physical_constants},~\ref{tab:notation.general},~\ref{tab:notation.condensed_matter},~and~\ref{tab:notation.resonator} present the important symbols.
+I have attempted to define all symbols where they are first used in the text.
+In many places I use an over-bar to denote a steady-state quantity that does not vary in time, and a $\delta$ prefix to denote the time-dependent difference from the steady-state value.
+For example, 
+$\delta\qpnumber(\time) = \qpnumber(\time) - \ssqpnumber$
+denotes a time-dependent deviation from the steady-state number of quasiparticle excitations in a superconductor.
+Except where noted, I use SI units.

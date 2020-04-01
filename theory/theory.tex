@@ -1,0 +1,51 @@
+\chapter{Kinetic inductance detectors: basic theory}
+\label{chp:theory}
+
+A KID is a superconducting thin-film microresonator in which the resonator itself is a detector~\autocite{Day2003Nature}.
+The detection is performed by using a microwave tone at the KID resonance frequency to measure changes in the electrodynamic response of the film, which is altered by deposited energy.
+Figure~\ref{fig:multiplexed_mkids_v1} shows the basic multiplexing concept.
+Each detector has a unique resonance frequency, and electronics similar to software-defined radio are able generate and analyze hundreds to thousands of tones simultaneously, allowing many detectors to be multiplexed.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{theory/multiplexed_mkids_v1.pdf}
+\caption[A schematic that shows how KIDs are read out and multiplexed.]
+{
+A schematic that shows how KIDs are read out and multiplexed.
+The annotation refers specifically to the KIDs that are discussed in Chapter~\ref{chp:multichroic}, which are made from aluminum and niobium.
+The tones are generated at left, propagate past the detectors, and are amplified at right by the low-noise amplifier (LNA).
+}
+\label{fig:multiplexed_mkids_v1}
+\end{figure}
+
+Figure~\ref{fig:introduction_resonator_amplitude_phase} shows how a KID responds to an increase in illumination: the resonance frequency decreases, and the internal dissipation increases.
+The changes shown in the plot were due to a change in the temperature of a black body load that illuminated the detectors.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.7\textwidth]{theory/introduction_resonator_amplitude_phase.pdf}
+\caption[The amplitude and phase of the forward transmission past a resonator, versus frequency.]
+{
+The amplitude and phase of the forward transmission past a resonator, plotted versus frequency, taken at two different levels of illumination from a beam-filling black body source.
+The blue (red) points were taken with the source at \SI{3.3}{K} (\SI{5}{K}).
+The small points are the data, the lines are a fit to a resonator model, and the large points mark the resonance frequencies extracted from the fits.
+}
+\label{fig:introduction_resonator_amplitude_phase}
+\end{figure}
+
+In this chapter I introduce the theory that is necessary to understand the response of a KID to light.
+Section~\ref{sec:theory.ground_state} contains a quick introduction to the necessary elements of the BCS theory of superconductivity and the superconducting ground state.
+In Section~\ref{sec:theory.quasiparticle}, I discuss the generation, scattering, decay, and diffusion of the quasiparticle excitations of a superconductor.
+In Section~\ref{sec:theory.electrodynamics}, I discuss superconductor electrodynamics, focusing on the effect of the quasiparticles.
+In Section~\ref{sec:theory.perturbation}, I introduce a framework for describing the non-equilibrium state of a superconducting thin film as a small perturbation to the ground state.
+In Section~\ref{sec:theory.qpnumber}, I introduce a simplified description of the film in terms of only the total number of quasiparticles, then use this model to motivate and solve the equations that describe the dynamics of the quasiparticle system.
+In Section~\ref{sec:theory.resonator}, I discuss a generic model for a shunt-coupled resonator and use it to describe the lumped-element and transmission-line resonators used for the KIDs in this thesis.
+In Section~\ref{sec:theory.response}, I use the results from previous sections to derive the response equations for a detector, starting with the absorption of light and ending with the electrical signal that is recorded by the electronics.
+
+\input{theory/ground_state.tex}
+\input{theory/quasiparticle.tex}
+\input{theory/electrodynamics.tex}
+\input{theory/perturbation.tex}
+\input{theory/qpnumber.tex}
+\input{theory/resonator.tex}
+\input{theory/response.tex}

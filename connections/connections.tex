@@ -1,0 +1,54 @@
+\chapter{Connections to other work}
+\label{chp:connections}
+
+This appendix is intended to facilitate comparison between the results presented here and other works on quasiparticle dynamics.
+In a quasiparticle number model like the one used here, all of the dynamical results can be derived from the rate equation for the quasiparticle density.
+Table~\ref{tab:connections} summarizes the equivalences between variables that can be inferred by comparing the rate equations given here.
+\textcite{Zmuidzinas2012ARCMP} gives for the recombination rate
+\begin{equation}
+\Gamma_r
+  =
+  \frac{N_{qp}^2}{2 N^* \tau_\mathrm{max}}
+  + \frac{N_{qp}}{\tau_\mathrm{max}},
+\end{equation}
+where $N_{qp}$ is the quasiparticle number and $N^*$ and $\tau_\mathrm{max}$ are constants.
+For bare recombination, \textcite{Wilson2004PRB} give
+\begin{equation}
+\dv{N}{t}
+  =
+  2 \left( \Gamma_G - \frac{1}{2} \frac{R}{\mathrm{vol}} N^2 \right),
+\end{equation}
+where $\Gamma_G$ is the generation \textit{event} rate, $R$ is the recombination constant and $N$ is the number of quasiparticles.
+When they include the phonon system, they derive a modified equation that includes an effective recombination constant
+$R^* = R / F_\omega$, equivalent to $\qprecombinationeff$ here.
+\textcite{Wang2014NatComm} use
+\begin{equation}
+\dv{x_{qp}}{t}
+ =
+ -r x_{qp}^2 - s x_{qp} + g,
+\end{equation}
+where $x_{qp} = n_{qp} / n_{cp}$, $n_{qp}$ is the density of quasiparticles and $n_{cp}$ is the density of Cooper pairs.
+The number of Cooper pairs is not given explicitly but can be inferred to be equal to
+$n_{cp} = \ssdos \gap_\zerotemp$ in the notation used here
+by comparing their expression for the recombination constant $r$ with Equation~\ref{eqn:qprecombination} for $\qprecombinationeff$.
+Their solution to their rate equation is equivalent to the solution to Equation~\ref{eqn:rate_qpdensity} given here.
+Writing the equation in terms of perturbations to the steady-state density, as is done here, results in a simpler solution and a straightforward treatment of small perturbations.
+
+\begin{table}[tbp]
+\centering
+\caption
+{Connections between notation used in this thesis and in other works.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{cccl}
+\toprule
+This thesis & \textcite{Zmuidzinas2012ARCMP} & \textcite{Wilson2004PRB} & \textcite{Wang2014NatComm} \\
+\midrule
+$\qprelaxationtime$ & $\tau_\mathrm{qp}$ & $\tau_r^*$ & $\tau_\mathrm{ss}$ \\
+$\qprecombinationeff$ & $(2 n^* \tau_\mathrm{max})^{-1}$ & $R^*$ & $n_{cp} r$ \\
+$\qpsingledecay$ & $\tau_\mathrm{max}^{-1}$ & $\Gamma_t$ & $s$ \\
+$\ssdos$ & $N_0$ & $D(\varepsilon_F) / 2$ &  \\
+$\phonontrapping$ &  & $F_\omega$ & $F$ \\
+\bottomrule
+\end{tabular}
+\label{tab:connections}
+\end{table}

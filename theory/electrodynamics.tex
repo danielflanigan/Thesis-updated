@@ -1,0 +1,160 @@
+\section{Electrodynamics}
+\label{sec:theory.electrodynamics}
+
+\subsection{The two-fluid model}
+\label{sec:theory.electrodynamics.two-fluid}
+
+\todo[inline]{Give and discuss London equations, and limitations.}
+%Long before the BCS theory was developed, the electrodynamic response of a superconductor was described by the phenomenological London theory.
+
+A simple model that gives qualitatively correct results for the electrodynamics of a superconductor involves treating the Cooper pair condensate and the quasiparticle excitations as two fluids with different behavior.
+Using a Drude model, the quasiparticles are treated as normal electrons with a scattering time $\tau_\normal$, while the condensate is treated by taking its scattering time to be infinite.
+This requires extending Ohm's law
+$\vb{\currentdensity} = \conductivity \vefield$
+to a complex conductivity
+$\conductivity = \reconductivity - \I \imconductivity$.
+For angular frequencies $\omega$ such that
+$\omega \tau_\normal \ll 1$
+and
+$\hbar \omega < 2 \gap$,
+this leads to~\autocite{Tinkham2004}
+\begin{align}
+\reconductivity(\omega)
+  &=
+  \frac{\pi n_\superconducting \unitcharge^2}{2 \mass} \delta(\omega)
+  + \frac{n_\normal \unitcharge^2 \tau_\normal}{\mass}; \\
+\imconductivity(\omega)
+  &=
+  \frac{n_\superconducting \unitcharge^2}{\mass \omega},
+\label{eqn:two-fluid_conductivity}
+\end{align}
+where $n_\mathrm{n, s}$ are respectively the densities of the normal and superconducting fluids, and $\delta$ is the delta function.
+This model predicts perfect conductivity only at zero frequencies, and some dissipation at nonzero frequencies whenever  excitations are present.
+It also predicts a large kinetic inductance, an effect which is negligible in normal metals: a significant amount of energy from the field is converted into the kinetic energy of the superconducting fluid (that is, the Cooper pairs) and is then released when the field changes direction.
+This effect causes the supercurrent to lag the electric field.
+While these conclusions are useful, to describe KID response we need a more sophisticated model based on the BCS theory.
+
+
+\subsection{The Mattis-Bardeen theory}
+\label{sec:theory.electrodynamics.mattis-bardeen}
+
+\todo[inline]{Give Chambers expression and discuss cutoffs in the spatial integral.}
+\textcite{MattisBardeen1958PR} derived expressions for the relationship between the current density and vector potential for normal metals and, starting from the BCS theory, for superconducting metals.
+Their most general expression involves a spatial integral because the response is non-local.
+However, in the extreme anomalous limit, where the penetration depth $\penetrationdepth$ is much less than the coherence length $\coherencelength$, they derive equations that are effectively local.
+These expressions should also be valid for the aluminum films discussed in this thesis, which are sufficiently thin that scattering at the film interfaces limits the mean free path $\meanfreepath$ to a length of order $\thickness$, the film thickness.
+The ratios of the real and imaginary parts of the complex conductivity to the normal state conductivity $\normalconductivity$ are
+\begin{align}
+\begin{split}
+\frac{\reconductivity}{\normalconductivity}
+  &=
+  \frac{2}{\planck \freadout} \int_\gap^\infty \dd{\energy}
+  \left[ \qpoccupancy(\energy) - \qpoccupancy(\energy + \planck \freadout) \right]
+  \frac{\energy^2 + \gap^2 + \planck \freadout \energy}
+  {[\energy^2 - \gap^2]^{1/2} [(\energy + \planck \freadout)^2 - \gap^2]^{1/2}} \\
+  &\quad +
+  \frac{1}{\planck \freadout} \int_{\gap - \planck \freadout}^{-\gap} \dd{\energy}
+  \left[ 1 - 2 \qpoccupancy(\energy + \planck \freadout) \right]
+  \frac{\energy^2 + \gap^2 + \planck \freadout \energy}
+  {[\energy^2 - \gap^2]^{1/2} [(\energy + \planck \freadout)^2 - \gap^2]^{1/2}};
+\end{split}
+\label{eqn:mattisbardeen1}
+\end{align}
+and
+\begin{equation}
+\frac{\imconductivity}{\normalconductivity}
+  =
+  \frac{1}{\planck \freadout} \int_{\gap - \planck \freadout; -\gap}^{\gap} \dd{\energy}
+  \left[ 1 - 2 \qpoccupancy(\energy + \planck \freadout) \right]
+  \frac{\energy^2 + \gap^2 + \planck \freadout \energy}
+  {[\gap^2 - \energy^2]^{1/2} [(\energy + \planck \freadout)^2 - \gap^2]^{1/2}}.
+\label{eqn:mattisbardeen2}
+\end{equation}
+For $\planck \freadout < 2 \gap$, the second integral in Equation~\ref{eqn:mattisbardeen1} is not present and the lower limit of the integral in Equation~\ref{eqn:mattisbardeen2} is $\gap - \planck \freadout > -\gap$, while for $\planck \freadout > 2 \gap$ the lower limit of this integral is $-\gap$.
+At temperature
+$\temperature = 0$
+no quasiparticles are excited, so $\qpoccupancy = 0$ and $\reconductivity(\temperature = 0) = 0$;
+as derived in Appendix~\ref{chp:first-order_response},
+$\imconductivity(\temperature = 0) = \pi \gap_\zerotemp \normalconductivity / \planck \freadout$.
+The zero-temperature frequency dependence is the same as in the two-fluid model, but this is not true at nonzero temperatures.
+
+
+\subsection{Surface impedance}
+\label{sec:theory.electrodynamics.surface_impedance}
+
+The complex conductivity describes the local response of the current density to an applied field.
+However, the relationship between the fields at the metal surface and the complex conductivity has additional dependence on geometry.
+These effects can be described using the surface impedance $\impedance_\surface = \resistance_\surface + \I \reactance_\surface$,
+where
+$\resistance_\surface$ is the surface resistance and $\reactance_\surface$ is the surface reactance.
+The relationship between the surface reactance and the kinetic inductance is $\reactance_\surface = 2 \pi \freadout \inductance_\kinetic$.
+If $\penetrationdepth$ is the effective penetration depth at $\temperature = 0$, then the surface impedance is purely reactive:
+\begin{equation}
+\impedance_\surface(0)
+  =
+  \I \reactance_\surface(0)
+  =
+  2 \pi \I \impedance_\vacuum \freadout \penetrationdepth / \lsvac.
+\end{equation}
+The effective penetration depth, which depends on the geometry, is much less than the free space wavelength, so the surface reactance is much less than the vacuum impedance.
+
+Changes in the complex conductivity alter the surface impedance. In some simple cases this relationship can be written~\autocite{Zmuidzinas2012ARCMP}
+\begin{equation}
+\impedance_\surface
+  =
+  \impedance_\surface(0) \left(\frac{\conductivity}{\conductivity(0)}\right)^{-\surfimpexp}
+  =
+  \impedance_\surface(0)
+  \left( 1 + \I \frac{\conductivity - \conductivity(0)}{\imconductivity(0)} \right)^{-\surfimpexp}.
+\label{eqn:surface_impedance.response}
+\end{equation}
+Under the conditions discussed in this work, both the real and imaginary parts of $[\conductivity - \conductivity(0)] / \imconductivity(0)$ will turn out to be small, so we can use a first-order approximation for the relationship between a shift in the conductivity and a shift in the surface impedance:
+\begin{equation}
+\impedance_\surface
+  \approx
+  \impedance_\surface(0) \left( 1 - \surfimpexp \frac{\conductivity - \conductivity(0)}{\conductivity(0)} \right)
+  =
+  \impedance_\surface(0) \left( 1 - \I \surfimpexp \frac{\conductivity - \conductivity(0)}{\imconductivity(0)} \right).
+\end{equation}
+The shift from the zero-temperature surface impedance is thus
+\begin{equation}
+\impedance_\surface - \impedance_\surface(0)
+  =
+  \resistance_\surface + \I [\reactance_\surface - \reactance_\surface(0)]
+  =
+  \surfimpexp \reactance_\surface(0)
+  \left( \frac{\reconductivity - \I [\imconductivity - \imconductivity(0)]}{\imconductivity(0)} \right).
+\label{eqn:impedance_surface_first_order}
+\end{equation}
+We see that the first-order approximation allows us to separate real and imaginary components cleanly:
+\begin{align}
+\begin{split}
+\resistance_\surface
+  &=
+  \surfimpexp \reactance_\surface(0) \frac{\reconductivity}{\imconductivity(0)}; \\
+\reactance_\surface - \reactance_\surface(0)
+  &=
+  -\surfimpexp \reactance_\surface(0) \frac{\imconductivity - \imconductivity(0)}{\imconductivity(0)}.
+\end{split}
+\label{eqn:surface_resistance_and_reactance_shift}
+\end{align}
+These equations are used later to calculate detector responsivity.
+
+In the thin film, local limit discussed above, where the electron mean free path is limited by diffusive scattering at the surfaces,
+$\surfimpexp = 1$; also in this limit, the zero-temperature surface impedance is
+$\impedance_\surface(0) = \I / \imconductivity(0) \thickness$,
+where $\thickness$ is the film thickness~\autocite{Zmuidzinas2012ARCMP}.
+\todo[inline]{Mention that Zs goes as 1 / d2 here.}
+This leads to a simple relationship between the surface impedance and complex conductivity:
+\begin{equation}
+\impedance_\surface
+  =
+  \frac{1}{\thickness \conductivity}
+  \approx
+  \frac{\reconductivity}{\thickness \imconductivity^2}
+  + \frac{\I}{\thickness \imconductivity},
+\end{equation}
+using $\reconductivity / \imconductivity \ll 1$, which is true at low temperatures.
+\todo[inline]{Understand and explain various limits relevant for surface impedance: extreme anomalous, thick film, thin film, etc.}
+
+

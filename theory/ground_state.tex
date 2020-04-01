@@ -1,0 +1,131 @@
+\section{The BCS theory and the ground state }
+\label{sec:theory.ground_state}
+
+\subsection{The Cooper pair condensate}
+\label{sec:theory.ground_state.condensate}
+
+\todo[inline]{Re-read Tinkham and update.}
+In the Bardeen-Cooper-Schrieffer (BCS) theory of superconductivity~\autocite{BCS1957PRL, BCS1957PR}, the superconducting ground state can be described in terms of individual-electron (Bloch) states occupied in pairs with opposite momentum and spin, called Cooper pairs~\autocite{Cooper1956PRL}.
+These Cooper pairs form due to a phonon-mediated attractive potential $\bcspotential$ between electrons that are within the Debye energy $\phononenergy_\debye$ of the Fermi energy.
+The coherence length
+$\coherencelength \sim \hbar \velocity_\fermi / \kb \tc$,
+where $\velocity_\fermi$ is the Fermi velocity and $\tc$ is the critical temperature for the superconducting phase, corresponds to the minimum size of a Cooper pair as dictated by the uncertainty principle.
+For elemental superconductors the coherence length is much greater than the mean spacing between conduction electrons.
+While it is more accurate to think of correlations extending over a distance $\coherencelength$, a naive model of the pair condensate is sufficient for the calculations in this thesis.
+
+In a normal metal at temperature $\temperature = 0$, by definition, no states with energy greater than the Fermi energy $\blochenergy_\fermi$ are occupied.
+However, in a superconducting metal, even at $\temperature = 0$, some states within an energy range approximately $\kb \tc$ above the Fermi energy remain populated.
+The increase in kinetic energy compared to the normal state is outweighed by the decrease in potential energy due to the pairing.
+
+One of the most striking features of the transition to the superconducting state is the Meissner effect, in which, as the temperature is reduced below $\tc$, a screening supercurrent develops to expel any magnetic field from the interior of a bulk superconductor.
+This screening is quantified by the penetration depth $\penetrationdepth$, which is the distance from a surface over which the screening supercurrent causes magnetic fields to decay in the bulk.
+In the phenomenological London theory, developed long before the BCS theory, the penetration depth at zero temperature is
+\begin{equation}
+\penetrationdepth_\mathrm{L}
+  =
+  \left( \frac{\lsvac m_\mathrm{s}}{\impvac n_\mathrm{s} q_\mathrm{s}^2}
+  \right)^{1/2},
+\end{equation}
+where $\lsvac$ is the speed of light in vacuum, $\impvac$ is the impedance of vacuum, and $m_\mathrm{s}$, $n_\mathrm{s}$, and $q_\mathrm{s}$ are respectively the mass, density, and charge of the superconducting carriers.
+The aluminum films used for the detectors discussed in this thesis are \SIrange{10}{50}{nm} thick, while the bulk penetration depth for aluminum at low temperature and low frequency is about \SI{50}{nm}~\autocite{Faber1955PRS, Biondi1959bPR}, so the fields completely enter these films. 
+The penetration depth is closely related to the reactive part of the superconductor's surface impedance $\impedance_\surface$, discussed in Section~\ref{sec:theory.electrodynamics.surface_impedance} below.
+
+\todo[inline]{Understand time-varying field screening.}
+%As in the normal metal, static electric fields are screened over atomic-scale lengths.
+
+In a BCS superconductor below $\tc$, there is a minimum energy $\gap$, called the gap energy, for excitations from the ground state.
+These excitations are important for the electrodynamic behavior of a KID, and are discussed in detail later.
+In the in the weak-coupling limit of BCS theory, where
+$\ssdos \ucvolume \bcspotential \ll 1$,
+the critical temperature $\tc$ is proportional to the zero temperature gap energy $\gap_\zerotemp$.
+Here, $\ssdos$ is the single spin density of states at the Fermi energy and $\ucvolume$ is the volume of a unit cell.
+The relationship is $\gap_\zerotemp = 1.76 \, \kb \tc$, and the numerical factor is accurate to about 20\% in actual elemental superconductors~\autocite{Tinkham2004}.
+
+
+\subsection{Fiducial parameters}
+\label{sec:theory.ground_state.fiducial}
+
+In our current experimental setup we measure the transition temperature either by observing the change in film resistance using a standard four-wire scheme or by observing changes in microwave transmission through the transmission line on a chip containing resonators.
+In \SIrange{10}{50}{nm} thick aluminum films we typically measure $\tc$ slightly elevated from the bulk value of \SI{1.2}{K} by \SIrange{0.1}{0.2}{K}, in agreement with other measurements of thin aluminum films~\autocite{Townsend1972PRB}.
+Although we are not yet able to directly measure $\gap$, measurements of the gap in thin aluminum films have also shown enhancement above the bulk value~\autocite{Court2008SUST}, and in the absence of a gap measurement we typically assume that the BCS relation remains valid.
+Note that some relevant quantities vary exponentially with the ratio of the gap to the temperature, so a small uncertainty in the gap energy may lead to a much larger uncertainty in predictions of such quantities.
+
+As shown in Table~\ref{tab:energies}, the two types of KIDs I discuss here have very different typical resonance frequencies.
+In both cases, $\planck \freadout / \gap \ll 1$.
+If $\temperature_\bath$ is the bath temperature of the detectors, then for the single-polarization lumped-element KIDs $\planck \freadout_\singlepol / \kb \temperature_\bath \ll 1$, while for the multichroic co-planar waveguide KIDs $\planck \freadout_\multichroic / \kb \temperature_\bath \approx 1$.
+This distinction is not practically important for the readout photon occupancy, because the readout power is always sufficiently high to produce an occupancy much greater than one.
+
+\begin{table}[htb]
+\centering
+\caption
+[Fiducial energies, temperatures, and frequencies.]
+{
+Fiducial energies, temperatures, and frequencies:
+$\tc$ is close to the critical temperature we typically measure in aluminum films;
+$\temperature_\bath$ is a typical bath temperature; 
+$\freadout_\singlepol$ is a typical resonance frequency for the single-polarization lumped-element KIDs used in experiments discussed in Chapters~\ref{chp:loss}~and~\ref{chp:sensitivity};
+$\freadout_\multichroic$ is a typical resonance frequency for the multichroic CPW KIDs discussed in Chapter~\ref{chp:multichroic}.
+I use these values for numerical estimates, including the slightly elevated gap and critical temperature.
+}
+\renewcommand{\arraystretch}{1.2}
+\input{theory/energies.tex}
+\label{tab:energies}
+\end{table}
+
+KIDs have been made from numerous materials, some of which are not well-described by the BCS theory.
+However, the KIDs discussed in this work are made either from only aluminum or from both aluminum and niobium, both of which are BCS superconductors.
+Throughout this thesis, when making numerical estimates, I use typical material parameters for aluminum and niobium given in Table~\ref{tab:materials} along with the fiducial values given in Table~\ref{tab:energies}, including the slightly elevated values of $\tc$ and $\gap$ that we typically measure.
+These should give reasonable descriptions of the detectors we have tested.
+
+\todo[inline]{Check N0 for niobium and understand values given by Kaplan et al.}
+\begin{table}[htb]
+\centering
+\caption[Parameters of superconducting metals used in this thesis.]
+{
+Parameters of superconducting metals used in this thesis.
+See Table~\ref{tab:notation.condensed_matter} for the symbol definitions.
+Values are from \textcite{Kaplan1976PRB} except where noted.
+}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c c c c}
+\toprule
+Parameter & Unit & Aluminum & Niobium \\
+\midrule
+$\tc$ (bulk) & \si{K} & 1.19 & 9.2 \\
+%$\gap_\zerotemp$ & {} & {} & {} \\ 
+$\ssdos$ & \si{eV^{-1}.\micro\meter^{-3}} & \num{1.74e10}~\autocite{Thomas2015SUST} & \num{8.52e10}~\autocite{Jani1988PRB} \\
+$\electronphonontime$ & \si{ns} & 438 & 0.149 \\
+\bottomrule
+\end{tabular}
+\label{tab:materials}
+\end{table}
+
+\subsection{Radiation detection using superconductors}
+\label{sec:theory.ground_state.detection}
+
+For a KID absorbing pair-breaking radiation, the cutoff (lowest detectable) frequency is
+\begin{equation}
+\foptical_\cutoff 
+  =
+  2 \gap / \planck
+  \approx
+  3.5 \, \kb \tc / \planck
+  \approx
+  \SI{74}{GHz} \left( \tc / \SI{1}{K} \right).
+\end{equation}
+To minimize the rate of thermal excitations, KIDs must be operated at a low bath temperature.
+If $\temperature_\bath$ is the practically achievable bath temperature for a large detector array designed to detect photons with frequency $\foptical$, the superconducting energy gap must satisfy
+\begin{equation}
+\planck \foptical / 2
+  >
+  \gap
+  \gg
+  \kb \temperature_\bath.
+\end{equation}
+Fortunately, this is currently possible over at least part of the frequency range relevant for CMB observations.
+Aluminum can be used to detect pair-breaking photons with frequencies above
+$\foptical_\cutoff \approx \SI{100}{GHz}$.
+Refrigeration using adiabatic demagnetization or helium dilution allows for cooling of large arrays to temperatures
+$\temperature_\bath \approx \SI{0.1}{K} \sim \tc / 10$,
+sufficiently low that thermal excitations are negligible.
+This allows KIDs to achieve, in principle, the fundamental sensitivity limit set by the statistics of photon arrival.

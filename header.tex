@@ -1,0 +1,149 @@
+% Packages
+\usepackage[
+  tmargin=1in,
+  rmargin=1in,
+  lmargin=1in,
+  bmargin=1.25in]
+  {geometry}
+\usepackage{setspace}  % line spacing
+\usepackage{tocloft}  % table of contents and list of figures and tables
+\usepackage{newtxtext, newtxmath}  % fonts
+\usepackage{microtype}  % subtle typographic enhancements
+\usepackage[american]{babel}  % commas inside quotes, etc.
+\usepackage{csquotes}  % used by babel
+\usepackage[
+  backend=biber,
+  style=phys,
+  autocite=plain,
+  biblabel=brackets,
+  hyperref=true,
+  backref=true,
+  articletitle=true,
+  chaptertitle=false,
+  pageranges=false,
+  minbibnames=1,
+  maxbibnames=21]
+  {biblatex}
+\usepackage{mathtools}  % replaces amsmath
+\usepackage{physics}  % derivatives and other physics notation; includes amssymb
+\usepackage[separate-uncertainty=true]{siunitx}  % unit handling the right way
+\usepackage{booktabs}  % tables
+\usepackage{dcolumn}  % nice alignment of numbers in a table column
+\newcolumntype{d}[1]{D{.}{.}{#1} } %the argument for d specifies the maximum number of decimal places
+\usepackage{afterpage}  % helpful for dealing with floats
+\usepackage[final]{graphicx}  % graphics inclusion
+\usepackage[font=footnotesize]{caption}  % figure captions
+\usepackage[titletoc]{appendix}  % Appendix in TOC
+\usepackage{xcolor}  % text color
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.3}
+\definecolor{darkred}{rgb}{0.3, 0.0, 0.0}
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+\usepackage[
+  colorlinks,
+  breaklinks,
+  % For printing, use black for all links
+  linkcolor=black,  %darkred,
+  urlcolor=black,  %darkblue,
+  anchorcolor=black,  %darkblue,
+  citecolor=black  %darkblue
+  ]
+  {hyperref}  % links
+\usepackage{comment}  % adds comment environment for large sections
+\usepackage[
+  obeyDraft,
+  textsize=footnotesize,
+  backgroundcolor=lightgray,
+  linecolor=lightgray]
+  {todonotes}  % todo notes and missing figure placeholders
+
+% Bibliography
+\DefineBibliographyStrings{english}{ % For back-references
+  backrefpage = {Page},
+  backrefpages = {Pages},
+}
+\addbibresource{papers.bib}
+\addbibresource{other.bib}
+
+% Float placement: tend to put floats with text 
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.7}
+
+% Cover pages
+\newcommand{\thesistitle}{Kinetic inductance detectors for measuring the polarization of the cosmic microwave background}
+\newcommand{\thesisauthor}{Daniel Flanigan}
+\newcommand{\copyrightyear}{2018}
+\newcommand{\conferralyear}{2018}
+
+% Table of contents
+\renewcommand{\contentsname}{Table of Contents}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\setlength\cftparskip\baselineskip % Correct spacing in ToC, LoF, and LoT.
+
+% Blank page
+\newcommand{\blankpage}{\clearpage \thispagestyle{empty} \null \newpage}
+
+% Cover page, for printing
+\newcommand{\thesiscoverpage}{
+  \thispagestyle{empty}
+  \begin{center}
+    \vspace*{1in}
+    \textbf{\Large \scshape{\thesistitle}} \\
+    \vspace{2.9in}
+    \textbf{\LARGE \scshape{\thesisauthor}} \\
+    \vspace{2.9in}
+    \textbf{\scshape{Columbia University}} \\
+    \textbf{\conferralyear}
+  \end{center}
+  \clearpage
+}
+
+% Title page.
+\newcommand{\thesistitlepage}{
+  \thispagestyle{empty}
+  \begin{center}
+    \vspace*{1in}
+    \textbf{\LARGE \thesistitle} \\
+    \vspace{0.5in}
+    \textbf{\LARGE \thesisauthor} \\
+    \vspace{2in}
+    Submitted in partial fulfillment of the \\
+    requirements for the degree of\\
+    Doctor of Philosophy \\
+    in the Graduate School of Arts and Sciences \\
+    \vspace{1.5in}
+    \textbf{COLUMBIA UNIVERSITY} \\
+    \conferralyear
+  \end{center}
+  \clearpage
+}
+
+% Copyright page.
+\newcommand{\thesiscopyrightpage}{
+  \thispagestyle{empty}
+  \strut \vfill
+  \begin{center}
+    \copyright \, \copyrightyear \\
+    \thesisauthor \\
+    All rights reserved
+  \end{center}
+  \cleardoublepage
+}
+
+% Abstract page.
+\newcommand{\thesisabstract}{
+  \thispagestyle{empty}
+  \begin{center}
+  \textbf{\Large ABSTRACT} \\
+  \vspace{0.5in}
+  \textbf{\Large \thesistitle} \\
+  \vspace{0.5in}
+  \textbf{\Large \thesisauthor} \\
+  \vspace{0.5in}
+  \end{center}
+  \input{abstract}
+  \cleardoublepage
+}

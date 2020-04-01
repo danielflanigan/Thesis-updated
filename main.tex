@@ -1,0 +1,90 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[12pt,letterpaper,final]{report}
+
+\input{header.tex}
+
+\begin{document}
+
+% The first pages are not numbered
+\pagenumbering{Alph}  % Give these pages unique identifiers
+\pagestyle{empty}
+\doublespacing
+
+% Cover page and blank page added for printing
+%\thesiscoverpage
+%\blankpage
+
+% Two blank pages added for printing to produce one blank sheet at the beginning
+\blankpage
+\blankpage
+\thesistitlepage
+\thesiscopyrightpage
+\thesisabstract
+
+% With a 1.25" bottom margin, this puts the page number 0.75" from the bottom
+\setlength{\footskip}{0.5in}
+
+\pagenumbering{roman}
+\pagestyle{plain}
+\singlespacing
+
+\tableofcontents
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables 
+\clearpage
+
+\doublespacing
+\input{acknowledgements.tex}
+\clearpage
+
+
+% Dedication page
+\thispagestyle{plain}
+\strut \vfill
+\begin{center}
+{\LARGE 
+To Frank
+}
+\end{center}
+\vfill \strut
+\clearpage
+
+%\listoftodos
+%\clearpage
+
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+\input{introduction/introduction.tex}
+\input{cmb/cmb.tex}
+\input{theory/theory.tex}
+\input{loss/loss.tex}
+\input{sensitivity/sensitivity.tex}
+\input{multichroic/multichroic.tex}
+
+\begin{appendices}
+\input{connections/connections.tex}
+\input{first-order_response/first-order_response.tex}
+\input{hardware/hardware.tex}
+\end{appendices}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+\singlespacing
+\printbibliography[title={References}]
+
+% Three blank pages added for printing to produce one blank sheet at the end
+\blankpage
+\blankpage
+\blankpage
+
+\end{document}
